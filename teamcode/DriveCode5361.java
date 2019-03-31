@@ -72,6 +72,10 @@ public class DriveCode5361 extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             omniCalc();
+	    //Lander Riser:
+            double upPower = gamepad1.right_trigger;
+            double downPower = -gamepad1.left_trigger;
+            landerRiser.setPower(upPower + downPower); //To stop, let go of both. If that doesn't work, hold both all the way down, but this is not preferable.
 
         }
     }
