@@ -34,6 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -54,13 +55,12 @@ import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="RedSide5361_Rover_Ruckus_D", group="Linear Opmode")
 @Disabled
-public class RedSide5361_Rover_Ruckus_D extends LinearOpMode {
+public class DriveCode5361 extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor motorFR, motorBR, motorFL, motorBL, extFR, extBR, extFL, extBL;
-    private Servo armBase, armDir, cFlap;
-    private ColorSensor sensorColor;
+    private DcMotor motorFR, motorBR, motorFL, motorBL, landerRiser;
+    private Servo markerDrop;
 
     @Override
     public void runOpMode() {
@@ -72,8 +72,7 @@ public class RedSide5361_Rover_Ruckus_D extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             omniCalc();
-            armControl();
-            extControl();
+
         }
     }
 
@@ -84,17 +83,11 @@ public class RedSide5361_Rover_Ruckus_D extends LinearOpMode {
         motorBL = hardwareMap.dcMotor.get("motorBL");
         motorFR = hardwareMap.dcMotor.get("motorFR");
         motorBR = hardwareMap.dcMotor.get("motorBR");
-        extFL = hardwareMap.dcMotor.get("extFL");
-        extBL = hardwareMap.dcMotor.get("extBL");
-        extFR = hardwareMap.dcMotor.get("extFR");
-        extBR = hardwareMap.dcMotor.get("extBR");
-        armBase = hardwareMap.servo.get("armBase");
-        armDir = hardwareMap.servo.get("armDir");
-        cFlap = hardwareMap.servo.get("cFlap");
-        sensorColor = hardwareMap.colorSensor.get("sence");
+        markerDrop = hardwareMap.servo.get("marker");
         motorFR.setDirection(DcMotor.Direction.FORWARD);
         motorBR.setDirection(DcMotor.Direction.FORWARD);
         motorFL.setDirection(DcMotor.Direction.FORWARD);
+        motorBL.setDirection(DcMotor.Direction.FORWARD);
     }
 
     private void omniCalc() //turns the gamepad controls into omniwheel commands
@@ -135,38 +128,6 @@ public class RedSide5361_Rover_Ruckus_D extends LinearOpMode {
         String teleFormat = "motorFL (%.2f), motorFR (%.2f), motorBL (%.2f), motorBR (%.2f)";
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.addData("Motors", teleFormat, FrontLeft, FrontRight, BackLeft, BackRight);
-        telemetry.update();
-    }
-
-    private void armControl() //controls the mineral arm
-    {
-
-    }
-
-    private void extDir(double x) //consolidates all the motors to prevent breakages
-    {
-        extFL.setPower(x);
-        extBL.setPower(x);
-        extFR.setPower(x);
-        extBR.setPower(x);
-    }
-
-    private void extControl() //controls the movement of the frame
-    {
-
-        while(gamepad2.left_bumper)//brings the frame up
-        {
-
-            extDir(.3);//this is a placeholder number
-
-        }
-        while(gamepad2.right_bumper)//brings the frame down
-        {
-            extDir(-.3);//this is a placeholder numnber
-        }
-        String teleFormat = "extFL (%.2f), extFR (%.2f), extBL (%.2f), extBR (%.2f)";
-        telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("Motors", teleFormat, extFL, extFR, extBL, extBR);
         telemetry.update();
     }
 }
