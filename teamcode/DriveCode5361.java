@@ -83,11 +83,13 @@ public class DriveCode5361 extends LinearOpMode {
         motorBL = hardwareMap.dcMotor.get("motorBL");
         motorFR = hardwareMap.dcMotor.get("motorFR");
         motorBR = hardwareMap.dcMotor.get("motorBR");
+        landerRiser = hardwareMap.get(DcMotor.class, "lander riser");
         markerDrop = hardwareMap.servo.get("marker");
         motorFR.setDirection(DcMotor.Direction.FORWARD);
         motorBR.setDirection(DcMotor.Direction.FORWARD);
         motorFL.setDirection(DcMotor.Direction.FORWARD);
         motorBL.setDirection(DcMotor.Direction.FORWARD);
+        landerRiser.setDirection(DcMotor.Direction.FORWARD);
     }
 
     private void omniCalc() //turns the gamepad controls into omniwheel commands
