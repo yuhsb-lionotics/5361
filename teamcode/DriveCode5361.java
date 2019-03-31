@@ -53,7 +53,7 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="RedSide5361_Rover_Ruckus_D", group="Linear Opmode")
+@TeleOp(name="Driver controlled", group="Linear Opmode")
 @Disabled
 public class DriveCode5361 extends LinearOpMode {
 
