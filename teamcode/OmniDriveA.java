@@ -112,7 +112,7 @@ public class OmniDriveA extends LinearOpMode{
                     (runtime.seconds() < timeoutS) &&
                     (motorA.isBusy() || motorB.isBusy() || motorC.isBusy() || motorD.isBusy() )) {
 
-                // Display it for the driver.
+                /* Telemetry code causes an error. // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d :%7d :%7d :%7d :%7d :%7d",
                         newATarget,
                         newCTarget
@@ -123,7 +123,7 @@ public class OmniDriveA extends LinearOpMode{
                         motorC.getCurrentPosition(),
                         motorD.getCurrentPosition()
                 );
-                telemetry.update();
+                telemetry.update(); */
 
             }
 
@@ -143,60 +143,60 @@ public class OmniDriveA extends LinearOpMode{
         }
     }
 
-    void move(double inches, double timeout)
+    void move(double inches, float timeout)
     {
         encoderDrive(DRIVE_SPEED,  inches,  inches, inches, inches,timeout);
     }
 
 
-    void strafeLeft(double inches, double timeout)
+    void strafeRight(double inches, float timeout)
     {
         encoderDrive(DRIVE_SPEED,  inches,  -inches, -inches, inches,timeout);
     }
 
-    void strafeRight(double inches, double timeout)
+    void strafeLeft(double inches, float timeout)
     {
         encoderDrive(DRIVE_SPEED,  -inches,  inches, inches, -inches,timeout);
     }
 
-    void pivotTurnLeftFL(double inches, double timeout) {
+    void pivotTurnLeftFL(double inches, float timeout) {
         encoderDrive(TURN_SPEED,  0,  -inches, inches, inches, timeout);
     }
 
-    void pivotTurnLeftBL(double inches, double timeout) {
+    void pivotTurnLeftBL(double inches, float timeout) {
         encoderDrive(TURN_SPEED,  -inches,  0, inches, inches, timeout);
     }
 
-    public void pivotTurnLeftFR(double inches, double timeout) {
+    public void pivotTurnLeftFR(double inches, float timeout) {
         encoderDrive(TURN_SPEED,  -inches,  -inches, 0, inches, timeout);
     }
 
-    public void pivotTurnLeftBR(double inches, double timeout) {
+    public void pivotTurnLeftBR(double inches, float timeout) {
         encoderDrive(TURN_SPEED,  -inches,  -inches, inches, 0, timeout);
     }
 
-    void pivotTurnRightFL(double inches, double timeout) {
+    void pivotTurnRightFL(double inches, float timeout) {
         encoderDrive(TURN_SPEED,  0,  inches, -inches, -inches, timeout);
     }
 
-    void pivotTurnRightBL(double inches, double timeout) {
+    void pivotTurnRightBL(double inches, float timeout) {
         encoderDrive(TURN_SPEED,  inches,  0, -inches, -inches, timeout);
     }
 
-    void pivotTurnRightFR(double inches, double timeout) {
+    void pivotTurnRightFR(double inches, float timeout) {
         encoderDrive(TURN_SPEED,  inches,  inches, 0, -inches, timeout);
     }
 
-    void pivotTurnRightBR(double inches, double timeout) {
+    void pivotTurnRightBR(double inches, float timeout) {
         encoderDrive(TURN_SPEED,  inches,  inches, -inches, 0, timeout);
     }
 
-    void turnLeft(double inches, double timeout)
+    void turnLeft(double inches, float timeout)
     {
         encoderDrive(TURN_SPEED,  -inches,  -inches, inches, inches, timeout);
     }
 
-    void turnRight(double inches, double timeout)
+    void turnRight(double inches, float timeout)
     {
         encoderDrive(TURN_SPEED,  inches,  inches, -inches, -inches, timeout);
     }
