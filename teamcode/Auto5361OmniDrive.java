@@ -11,12 +11,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 
-@Autonomous(name="Independent Auto", group="Autonomous")
-public class Auto5361 extends LinearOpMode {
+@Autonomous(name="OmniDrive Auto", group="Autonomous")
+public class Auto5361OmniDrive extends OmniDriveA {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor motorFL, motorBL, motorFR, motorBR, landerRiser;
+    private DcMotor landerRiser;
     private Servo markerDrop;
 
 
@@ -25,11 +25,7 @@ public class Auto5361 extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        motorFL = hardwareMap.get(DcMotor.class, "motorFL");
-        motorBL = hardwareMap.get(DcMotor.class, "motorBL");
-        motorFR = hardwareMap.get(DcMotor.class, "motorFR");
-        motorBR = hardwareMap.get(DcMotor.class, "motorBR");
-        landerRiser = hardwareMap.get(DcMotor.class, "lander riser");
+        wheelInit("motorFL", "motorBL", "motorFR", "motorBR");
         landerRiser = hardwareMap.get(DcMotor.class, "lander riser");
         landerRiser.setDirection(DcMotor.Direction.FORWARD);
         landerRiser.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -50,8 +46,11 @@ public class Auto5361 extends LinearOpMode {
         landerRiser.setPower(0);
         telemetry.addData("Status","Unhooking");
         telemetry.update();
-        move(-3, 500, true);
-        strafeLeft(4, 1500, true);
+        //OmniDrive commands don't work now (at least not for some wheels). Not sure of the exact reason. We may have to use the built-in commands without OmniDrive.
+        move(-3, 1);
+        strafeLeft(4, 2);
+        //pivotTurnLeftFL(6, 1.5);
+        //turnLeft(6, 1);
         //drive to the depot:
         markerDrop.setPosition(0);
         sleep(1000);
@@ -60,44 +59,5 @@ public class Auto5361 extends LinearOpMode {
         markerDrop.setPosition(0);
         sleep(1000);
 
-    }
-
-    private void move(double power, int millis, boolean stopAfter) { strafe(power, power, millis, stopAfter); }
-
-    private void strafeLeft(double power, int millis, boolean stopAfter) { strafe(-power, power, millis, stopAfter); }
-
-    //powerA goes forward and to the right, powerB goes forward and to the left, where forward is the front according to the config (not real life).
-    private void strafe(double powerA, double powerB, int millis, boolean stopAfter) {
-        motorFL.setPower(-powerA);
-        motorBL.setPower(-powerB);
-        motorFR.setPower( powerB);
-        motorBR.setPower( powerA);
-
-        sleep(millis);
-
-        if (stopAfter) {
-            motorFL.setPower(0);
-            motorBL.setPower(0);
-            motorFR.setPower(0);
-            motorBR.setPower(0);
-            sleep(200);
-        }
-    }
-
-    private void rotateLeft(double power, int millis, boolean stopAfter) {
-        motorFL.setPower( power);
-        motorBL.setPower( power);
-        motorFR.setPower( power);
-        motorBR.setPower( power);
-
-        sleep(millis);
-
-        if (stopAfter) {
-            motorFL.setPower(0);
-            motorBL.setPower(0);
-            motorFR.setPower(0);
-            motorBR.setPower(0);
-            sleep(200);
-        }
     }
 }
