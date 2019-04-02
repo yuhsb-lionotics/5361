@@ -18,7 +18,6 @@ public class Auto5361 extends OmniDriveA {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor landerRiser;
     private Servo markerDrop;
-    //private static final double MARKER_DROP_POSITION = 0.5;
 
 
     @Override
@@ -47,11 +46,18 @@ public class Auto5361 extends OmniDriveA {
         landerRiser.setPower(0);
         telemetry.addData("Status","Unhooking");
         telemetry.update();
+        //OmniDrive commands don't work now (at least not for some wheels). Not sure of the exact reason. We may have to use the built-in commands without OmniDrive.
         move(-3, 1);
-        encoderDrive(DRIVE_SPEED, 6, -6,-6,6,3); //if this works there's a problem with the definition of strafeLeft() in Omnidrive.
         strafeLeft(4, 2);
         //pivotTurnLeftFL(6, 1.5);
         //turnLeft(6, 1);
+        //drive to the depot:
+        markerDrop.setPosition(0);
+        sleep(1000);
+        markerDrop.setPosition(0.5);
+        sleep(1000);
+        markerDrop.setPosition(0);
+        sleep(1000);
 
     }
 }

@@ -25,7 +25,7 @@ public class OmniDriveA extends LinearOpMode{
     private DcMotor motorC;
     private DcMotor motorD;
 
-    private static final double COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
+    private static final double COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder
     private static final double DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
     private static final double WHEEL_DIAMETER_INCHES   = 3.92 ;     // For figuring circumference
     private static final double COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
@@ -124,6 +124,11 @@ public class OmniDriveA extends LinearOpMode{
                         motorD.getCurrentPosition()
                 );
                 telemetry.update(); */
+                telemetry.addData("A",motorA.isBusy());
+                telemetry.addData("B",motorB.isBusy());
+                telemetry.addData("C",motorC.isBusy());
+                telemetry.addData("D",motorD.isBusy());
+                telemetry.update();
 
             }
 
