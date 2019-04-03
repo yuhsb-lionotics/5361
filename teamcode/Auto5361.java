@@ -46,19 +46,20 @@ public class Auto5361 extends LinearOpMode {
         landerRiser.setPower(-1);
         telemetry.addData("Status", "Descending");
         telemetry.update();
-        sleep(6000);
+        sleep(5550);
         landerRiser.setPower(0);
         telemetry.addData("Status","Unhooking");
         telemetry.update();
-        move(-3, 500, true);
-        strafeLeft(4, 1500, true);
-        //drive to the depot:
+        move(-0.5, 300, true);
+        strafe(-0.4,0.6, 1800, true);
+        move(0.5,300,true);
         markerDrop.setPosition(0);
         sleep(1000);
         markerDrop.setPosition(0.5);
-        sleep(1000);
+        sleep(700);
         markerDrop.setPosition(0);
-        sleep(1000);
+        strafe(0, -0.5,250,true);
+        strafe(0.5, -0.25, 4300, true);
 
     }
 
